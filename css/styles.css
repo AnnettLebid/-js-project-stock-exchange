@@ -7,5 +7,17 @@ body {
 
 .custom-input {
     height: 40px;
-    width: 45%;
+    width: 80%;
 }
+
+button {
+    height: 40px;
+    width: 17%;
+}
+
+.custom-spinner {
+    position: absolute;
+    bottom: -100px;
+    left: 350px;    
+}
+
