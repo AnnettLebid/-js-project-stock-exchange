@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: rgb(248,249,250);
+}
+
+.custom-input {
+    height: 40px;
+    width: 45%;
+}
