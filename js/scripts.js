@@ -1,18 +1,18 @@
 const userInputElement = document.getElementById("input");
 const button = document.getElementById("button");
 const spinner = document.getElementById("spinner");
-list = document.getElementById("list");
-const apiKey = "e2d2b008fa8386faff19423eff47af86";
+let list = document.getElementById("list");
+const apiKey = "ed93f3e229380c530b7a0e7663f86b99";
 
 button.addEventListener("click", () => {
-  getSearchResult();
+  getCompany();
 });
 
 function clearResult() {
   document.getElementById("list").innerHTML = " ";
 }
 
-async function getSearchResult() {
+async function getCompany() {
   clearResult();
   let userSearch = userInputElement.value;
   toggleSpinner();
@@ -24,13 +24,13 @@ async function getSearchResult() {
   presentCompList(data);
 }
 
-function presentCompList(array) { 
+function presentCompList(array) {
   let li = document.createElement("li");
   li.classList.add("list-group-item", "pl-0", "pr-0");
   let getresults = "";
   for (company of array) {
-    getresults += `<a href class = "list-group-item">${company.symbol} 
-      ${company.name}</a>`;
+    getresults += `<a href = "./company.html?symbol=${company.symbol}" class = "list-group-item">${company.symbol} 
+      ${company.name}</a>`;   
   }
   li.innerHTML = getresults;
   list.appendChild(li);
