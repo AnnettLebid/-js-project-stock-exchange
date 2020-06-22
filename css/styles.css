@@ -18,6 +18,24 @@ button {
 .custom-spinner {
     position: absolute;
     bottom: -100px;
-    left: 350px;    
 }
+
+
+/*Comany profile */
+
+.text-height-20 {
+    font-size: 20px;
+}
+
+.text-height-22 {
+    font-size: 22px;
+}
+
+.line-ht {
+    line-height: 128px;
+}
+
+    
+
+    
 
