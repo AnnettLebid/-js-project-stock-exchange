@@ -16,29 +16,30 @@
             <div class="col-md-10">
                 <div class="card mt-5 mb-3 shadow">
                     <div class="card-header d-flex justify-content-between align-items-center bg-white">
-                        <div class = "align-middle">
+                        <div class="align-middle">
                             <img id="logo" class="logo pl-1" src="">
                         </div>
                         <div>
-                        <span class="text-primary pl-1 pr-1 line-ht text-height-20"><a id="comp-name"></a></span>
-                        <span class="text-primary ml-3 pl-1 line-ht text-height-20" id="sector"></span>
+                            <span class="text-primary pl-1 pr-1 line-ht text-height-22"><a id="comp-name"></a></span>
+                            <span class="text-primary ml-3 pl-1 line-ht text-height-22" id="sector"></span>
+                        </div>
                     </div>
-                    </div>
-
                     <div class="card-body">
-                        <div class = "text-height-20 mb-3">Stock price: $<span id="price" class="mr-1"></span>
+                        <div class="text-height-20 mb-3 text-height-20">Stock price: $<span id="price"
+                                class="mr-1"></span>
                             <span id="changes"></span>
                         </div>
-                        <div class = "mb-3" id="description"></div>
-                      
+                        <div class="mb-3" id="description"></div>
                     </div>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
-           
-    </div>   
-       
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="./js/company.js"></script>
+
 </body>
 
 </html>

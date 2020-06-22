@@ -18,6 +18,7 @@ button {
 .custom-spinner {
     position: absolute;
     bottom: -100px;
+    left: 350px;
 }
 
 
@@ -31,9 +32,6 @@ button {
     font-size: 22px;
 }
 
-.line-ht {
-    line-height: 128px;
-}
 
     
 
