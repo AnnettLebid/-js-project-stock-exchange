@@ -12,24 +12,24 @@
   getComPriceHistory();
 
   function getStoredElements() {
-    companyData.compSymbol = new URLSearchParams(window.location.search).get(
-      "symbol"
-    );
+    companyData.searchCompSymbol = new URLSearchParams(
+      window.location.search
+    ).get("symbol");
     companyData.chartSpinner = document.getElementById("chart-spinner");
     companyData.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
   }
 
   async function getCompanyProfile() {
-    const { compSymbol, apiKey } = companyData;
+    const { searchCompSymbol, apiKey } = companyData;
     let response = await fetch(
-      `https://financialmodelingprep.com/api/v3/company/profile/${compSymbol}?apikey=${apiKey}`
+      `https://financialmodelingprep.com/api/v3/company/profile/${searchCompSymbol}?apikey=${apiKey}`
     );
-    let data = await response.json();    
+    let data = await response.json();   
     makeCompProfile(data);
     return data;
   }
 
-  function makeCompProfile(data) {    
+  function makeCompProfile(data) {
     let {
       companyName,
       sector,
@@ -56,13 +56,13 @@
   }
 
   async function getComPriceHistory() {
-    const { compSymbol, apiKey } = companyData;
+    const { searchCompSymbol, apiKey } = companyData;
     turnSpinnerOn();
     let response = await fetch(
-      `https://financialmodelingprep.com/api/v3/historical-price-full/${compSymbol}?serietype=line&apikey=${apiKey}`
+      `https://financialmodelingprep.com/api/v3/historical-price-full/${searchCompSymbol}?serietype=line&apikey=${apiKey}`
     );
-    let data = await response.json();
-    let priceHistory = data.historical;
+    let data = await response.json();    
+    let priceHistory = data.historical;    
     for (let i = 0; i < priceHistory.length; i += 100) {
       companies.graph.xYears.unshift(priceHistory[i].date);
       companies.graph.yPrices.unshift(priceHistory[i].close);
@@ -82,7 +82,7 @@
     chartSpinner.classList.add("d-none");
   }
 
-  async function makeCompChart(years, price) {    
+  async function makeCompChart(years, price) {
     let ctx = document.getElementById("chart").getContext("2d");
     ctx.canvas.width = 800;
     ctx.canvas.height = 400;

@@ -1,0 +1,24 @@
+body {
+    background-image: url("/img/90457.jpg");
+}
+
+.text-height-20 {
+    font-size: 20px;
+}
+
+.text-height-22 {
+    font-size: 22px;
+}
+
+.chart-spinner {
+    position: fixed;
+    top: 100px;
+    left: 680px;
+}
+
+.stock-image {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+}
+

@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: rgb(248,249,250);
+    background: rgb(248, 249, 250);
 }
 
 .custom-input {
@@ -21,24 +21,8 @@ button {
     left: 350px;
 }
 
-
-/*Comany profile */
-
-.text-height-20 {
-    font-size: 20px;
+.stock-image {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
 }
-
-.text-height-22 {
-    font-size: 22px;
-}
-
-.chart-spinner {
-    position: fixed;
-    top: 100px;
-    left: 680px;
-}
-
-    
-
-    
-

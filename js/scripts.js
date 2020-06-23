@@ -31,9 +31,8 @@
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${apiKey}`
     );
-    let companyObjects = await response.json();
-    // let symbol =
-    console.log(companyObjects);
+    let companyObjects = await response.json();   
+    // console.log(companyObjects);
     toggleSpinner();
     createCompaniesList(companyObjects);
   }
@@ -46,32 +45,48 @@
       );
       return response.json();
     });
-    const companyProfile = await Promise.all(companiesProfiles);
-    console.log(companyProfile);
+    const companiesDetailedProfiles = await Promise.all(companiesProfiles);
+    console.log(companiesDetailedProfiles);    
+    let listOfCompanies = companiesDetailedProfiles.map((compProfile) => {
+      let {
+        image,
+        companyName,              
+        changesPercentage,
+      } = compProfile.profile;      
+
+      let a = document.createElement("a");
+      document.getElementById("list").appendChild(a);
+      a.classList.add("list-group-item");
+      a.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);      
+
+      let companyImage = document.createElement("img");
+      companyImage.classList.add("stock-image");
+      companyImage.src = image;
+      a.appendChild(companyImage);
+
+      let compName = document.createElement("span");
+      compName.classList.add("ml-1");
+      compName.textContent = companyName;
+      a.appendChild(compName);
+
+      const compSymbol = document.createElement("span");
+      compSymbol.classList.add("ml-2");
+      compSymbol.textContent =  `(${compProfile.symbol})`;
+      a.appendChild(compSymbol);
+
+      let compChangesPercentage = document.createElement("span");
+      let number = changesPercentage.slice(1, -1);
+      compChangesPercentage.textContent = "(" + number + ")";
+      if (number[0] === "+") {
+        compChangesPercentage.classList.add("ml-2", "text-success");
+      } else if (number[0] === "-") {
+        compChangesPercentage.classList.add("ml-2", "text-danger");
+      } else {
+        compChangesPercentage.classList.add("ml-2", "text-body");
+      }
+      a.appendChild(compChangesPercentage);
+    });
   }
-
-  //   let li = document.createElement("li");
-  //   li.classList.add("list-group-item", "pl-0", "pr-0");
-  //   let getresults = "";
-  //   for (company of array) {
-  //     getresults += `<a href = "./company.html?symbol=${company.symbol}" class = "list-group-item">${company.symbol}
-  //     ${company.name}</a>`;
-  //   }
-  //   li.innerHTML = getresults;
-  //   list.appendChild(li);
-
-  // function createCompaniesList(array) {
-  //   let li = document.createElement("li");
-  //   li.classList.add("list-group-item", "pl-0", "pr-0");
-  //   let getresults = "";
-  //   for (company of array) {
-  //     getresults += `<a href = "./company.html?symbol=${company.symbol}" class = "list-group-item">${company.symbol}
-  //     ${company.name}</a>`;
-  //   }
-  //   li.innerHTML = getresults;
-  //   list.appendChild(li);
-  // }
-
   function toggleSpinner() {
     const { spinner } = stockData;
     spinner.classList.toggle("d-none");
