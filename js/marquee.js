@@ -1,6 +1,6 @@
 (() => {
   const marqueeData = {};
-  console.log("work")
+  
   getElements();
   getStockPriceData();
 
@@ -14,8 +14,13 @@
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/quotes/nyse?apikey=${apiKey}`
     );
-    let data = await response.json();
-    console.log(data);
+    let data = await response.json();     
+    return data.slice(0,200);
   }
+
+  const stockPriceArray = getStockPriceData();
+  
+
+
 
 })();
