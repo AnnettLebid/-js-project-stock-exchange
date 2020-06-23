@@ -31,7 +31,7 @@
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${apiKey}`
     );
-    let data = await response.json();
+    let data = await response.json();   
     toggleSpinner();
     createCompaniesList(data);
   }

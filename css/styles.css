@@ -32,6 +32,11 @@ button {
     font-size: 22px;
 }
 
+.chart-spinner {
+    position: fixed;
+    top: 100px;
+    left: 680px;
+}
 
     
 
