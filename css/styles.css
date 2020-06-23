@@ -27,3 +27,47 @@ button {
     width: 40px;
     margin-right: 10px;
 }
+
+/* .marquee {
+    display: block;
+    position: relative;
+    height: 30px;
+    color: white;
+
+    width: max-content;
+    animation: marquee 400s linear infinite;
+
+    overflow: hidden;
+} */
+
+.marqueeCSS {
+    background: #a35dc1;
+    overflow: hidden;
+}
+
+.marqueeCSS div {
+    position: relative;
+    top: -12px;
+    animation: CSSright linear 18s infinite;
+}
+
+@keyframes CSSright {
+    0% {
+        right: -100%
+    }
+
+    100% {
+        right: 100%
+    }
+}
+
+.marqueeCSS:hover div {
+    animation-play-state: paused;
+}
+
+.li {    
+    width: 100%;
+    padding: 1%;    
+    height: 20px;    
+    box-shadow: 0 0.1em 0.5em;
+}
