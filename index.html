@@ -15,6 +15,7 @@
 
 <body>
   <div class="marquee" id="marquee"></div>
+  <div id="newForm"></div>
   <div class="container p-0 justify-content-center">
     <h1 class="mt-5 text-center text-white">Search Nasdaq Stocks</h1>
     <div class="row justify-content-center">
@@ -35,11 +36,13 @@
   </div>
   </div>
   <script src="./js/Marquee.js"></script>
+  <script src="./js/SearchForm.js"></script>
   <script src="./js/scripts.js"></script>
   <script>
     (async function () {
       const marquee = new Marquee(document.getElementById("marquee"));
       marquee.loadMarquee();
+      const form = new SearchForm(document.getElementById("newForm"));
     })();
   </script>
 </body>
