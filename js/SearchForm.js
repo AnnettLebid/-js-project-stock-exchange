@@ -27,6 +27,7 @@ class SearchForm {
     const inputElement = document.createElement("input");
     inputElement.classList.add("custom-input", "m-1", "d-inline", "p-2");
     inputElement.type = "text";
+    inputElement.placeholder = "Search";
     const button = document.createElement("button");
     button.classList.add("btn-primary", "btn", "button", "align-self-center");    
     button.innerHTML = "Search";
@@ -34,7 +35,7 @@ class SearchForm {
     mainDiv.appendChild(inputWrapper);
     inputWrapper.appendChild(inputElement);
     inputWrapper.appendChild(button);    
-    this.parentElement.appendChild(wrapper);
+    this.parentElement.appendChild(mainWrapper);
   }
 }
 
