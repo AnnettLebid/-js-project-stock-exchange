@@ -3,7 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-image: url("/img/900.jpg");
-
+    overflow: hidden;
 }
 
 .custom-input {
@@ -28,46 +28,37 @@ button {
     margin-right: 10px;
 }
 
-/* .marquee {
-    display: block;
+.marquee {
+    width: max-content;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
     position: relative;
     height: 30px;
-    color: white;
+    white-space: nowrap;
 
-    width: max-content;
-    animation: marquee 400s linear infinite;
-
+    animation: marquee 800s linear infinite;
+    background: #ffff;
     overflow: hidden;
-} */
 
-.marqueeCSS {
-    background: #a35dc1;
-    overflow: hidden;
 }
 
-.marqueeCSS div {
-    position: relative;
-    top: -12px;
-    animation: CSSright linear 18s infinite;
-}
-
-@keyframes CSSright {
-    0% {
-        right: -100%
-    }
-
-    100% {
-        right: 100%
-    }
-}
-
-.marqueeCSS:hover div {
+.marquee:hover {
     animation-play-state: paused;
 }
 
-.li {    
-    width: 100%;
-    padding: 1%;    
-    height: 20px;    
-    box-shadow: 0 0.1em 0.5em;
+@keyframes marquee {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+
+.marquee-div {
+    display: flex;
+    height: 30px;
+    margin-left: 3px;   
 }
