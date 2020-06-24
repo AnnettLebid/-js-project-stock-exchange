@@ -10,12 +10,12 @@
   <link rel="shortcut icon" type="image/png" href="./img/nasdaq.jpg" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/styles.css">    
+  <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
-  <div class="marquee" id = "marquee"></div>
-  <div class="container p-0 justify-content-center">    
+  <div class="marquee" id="marquee"></div>
+  <div class="container p-0 justify-content-center">
     <h1 class="mt-5 text-center text-white">Search Nasdaq Stocks</h1>
     <div class="row justify-content-center">
       <div class="col-md-8 col-md-offset-5 shadow p-3 bg-white rounded mt-3">
@@ -34,9 +34,14 @@
     </div>
   </div>
   </div>
-  <script src="./js/marquee.js"></script> 
-  <script src="./js/scripts.js"></script> 
-  
+  <script src="./js/Marquee.js"></script>
+  <script src="./js/scripts.js"></script>
+  <script>
+    (async function () {
+      const marquee = new Marquee(document.getElementById("marquee"));
+      marquee.loadMarquee();
+    })();
+  </script>
 </body>
 
 </html>
