@@ -5,8 +5,8 @@ class SearchForm {
   }
 
   formCreation() {
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("row", "justify-content-center");
+    const mainWrapper = document.createElement("div");
+    mainWrapper.classList.add("row", "justify-content-center");
     const mainDiv = document.createElement("div");
     mainDiv.classList.add(
       "col-md-8",
@@ -25,16 +25,17 @@ class SearchForm {
       "align-middle"
     );
     const inputElement = document.createElement("input");
-    inputElement.classList.add("form-control");
+    inputElement.classList.add("custom-input", "m-1", "d-inline", "p-2");
     inputElement.type = "text";
-    const buttonWrapper = document.createElement("div");
-    buttonWrapper.classList.add("input-group-append");
     const button = document.createElement("button");
-    button.classList.add("buttonSearch", "btn", "btn-outline-secondary");
+    button.classList.add("btn-primary", "btn", "button", "align-self-center");    
     button.innerHTML = "Search";
-    buttonWrapper.appendChild(button);
+    mainWrapper.appendChild(mainDiv);
+    mainDiv.appendChild(inputWrapper);
     inputWrapper.appendChild(inputElement);
-    inputWrapper.appendChild(buttonDiv);
-    this.parentElement.appendChild(row);
+    inputWrapper.appendChild(button);    
+    this.parentElement.appendChild(wrapper);
   }
 }
+
+
