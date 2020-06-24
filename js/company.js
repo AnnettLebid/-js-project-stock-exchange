@@ -1,5 +1,5 @@
 (() => {
-  const companyData = {};
+  const variablesStore = {};
   let companies = {};
   companies.graph = {};
   companies.graph.xYears = [];
@@ -7,29 +7,32 @@
 
   getStoredElements();
   getCompanyProfile();
-  // const fetchedCompanyData = getCompanyProfile();
-  // makeCompProfile(fetchedCompanyData);
+  // const fetchedvariablesStore = getCompanyProfile();
+  // makeCompProfile(fetchedvariablesStore);
   getComPriceHistory();
 
   function getStoredElements() {
-    companyData.searchCompSymbol = new URLSearchParams(
+    variablesStore.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+    variablesStore.searchCompSymbol = new URLSearchParams(
       window.location.search
     ).get("symbol");
-    companyData.chartSpinner = document.getElementById("chart-spinner");
-    companyData.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+    variablesStore.companyNameDomElmt = document.getElementById("comp-name");
+    variablesStore.changesDomElmt = document.getElementById("changes");
+    variablesStore.chartSpinner = document.getElementById("chart-spinner");
   }
 
   async function getCompanyProfile() {
-    const { searchCompSymbol, apiKey } = companyData;
+    const { searchCompSymbol, apiKey } = variablesStore;
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/company/profile/${searchCompSymbol}?apikey=${apiKey}`
     );
-    let data = await response.json();   
+    let data = await response.json();
     makeCompProfile(data);
     return data;
   }
 
   function makeCompProfile(data) {
+    const { companyNameDomElmt, changesDomElmt } = variablesStore;
     let {
       companyName,
       sector,
@@ -41,28 +44,28 @@
     } = data.profile;
 
     document.getElementById("logo").src = image;
-    document.getElementById("comp-name").textContent = companyName;
-    document.getElementById("comp-name").setAttribute("href", `${website}`);
+    companyNameDomElmt.textContent = companyName;
+    companyNameDomElmt.setAttribute("href", `${website}`);
     document.getElementById("sector").textContent = sector;
     document.getElementById("price").textContent = price;
-    document.getElementById("changes").textContent = changesPercentage;
+    changesDomElmt.textContent = changesPercentage;
     if (changesPercentage[1] === "+") {
-      document.getElementById("changes").classList.add("text-success");
+      changesDomElmt.classList.add("text-success");
     }
     if (changesPercentage[1] === "-") {
-      document.getElementById("changes").classList.add("text-danger");
+      changesDomElmt.classList.add("text-danger");
     }
     document.getElementById("description").textContent = description;
   }
 
   async function getComPriceHistory() {
-    const { searchCompSymbol, apiKey } = companyData;
+    const { searchCompSymbol, apiKey } = variablesStore;
     turnSpinnerOn();
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/historical-price-full/${searchCompSymbol}?serietype=line&apikey=${apiKey}`
     );
-    let data = await response.json();    
-    let priceHistory = data.historical;    
+    let data = await response.json();
+    let priceHistory = data.historical;
     for (let i = 0; i < priceHistory.length; i += 100) {
       companies.graph.xYears.unshift(priceHistory[i].date);
       companies.graph.yPrices.unshift(priceHistory[i].close);
@@ -73,12 +76,12 @@
   }
 
   function turnSpinnerOn() {
-    const { chartSpinner } = companyData;
+    const { chartSpinner } = variablesStore;
     chartSpinner.classList.remove("d-none");
   }
 
   function turnSpinnerOff() {
-    const { chartSpinner } = companyData;
+    const { chartSpinner } = variablesStore;
     chartSpinner.classList.add("d-none");
   }
 
