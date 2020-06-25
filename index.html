@@ -24,13 +24,14 @@
   </div>
   <script src="./js/Marquee.js"></script>
   <script src="./js/SearchForm.js"></script>
-  <script src="./js/scripts.js"></script>
+  <!-- <script src="./js/scripts.js"></script> -->
   <script>
     (async function () {
       const marquee = new Marquee(document.getElementById("marquee"));
       marquee.loadMarquee();
-      const form = new SearchForm(document.getElementById("form"));
-      form.formCreation();
+      const form = new SearchForm(document.getElementById("form"));      
+      
+      form.onSearch();
     })();
   </script>
 </body>
