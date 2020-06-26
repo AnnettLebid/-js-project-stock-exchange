@@ -2,19 +2,19 @@ class SearchForm {
   constructor(parentElement) {
     this.parentElement = parentElement;
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-    this.spinner = document.getElementById("spinner");
-    this.list = document.getElementById("list");
-    this.button;
+    // this.spinner = document.getElementById("spinner");
+    // this.list = document.getElementById("list");
     this.inputElement;
+    this.button;
     this.formCreation();
+    // this.callback;
   }
 
   formCreation() {
-    console.log("Form creation start");
     const mainWrapper = document.createElement("div");
     mainWrapper.classList.add("row", "justify-content-center");
-    const mainDiv = document.createElement("div");
-    mainDiv.classList.add(
+    const mainContainer = document.createElement("div");
+    mainContainer.classList.add(
       "col-md-8",
       "col-md-offset-5",
       "shadow",
@@ -42,15 +42,15 @@ class SearchForm {
       "align-self-center"
     );
     this.button.innerHTML = "Search";
-    mainWrapper.appendChild(mainDiv);
-    mainDiv.appendChild(inputWrapper);
+    mainWrapper.appendChild(mainContainer);
+    mainContainer.appendChild(inputWrapper);
     inputWrapper.appendChild(this.inputElement);
     inputWrapper.appendChild(this.button);
     this.parentElement.appendChild(mainWrapper);
-    console.log("Form creation end");
   }
 
-  onSearch() {
+  onSearch(callback) {
+    // callback(this.companyObjects);
     console.log("Onsearch start");
     this.button.addEventListener("click", () => {
       this.getCompany(this.getUserSearch());
@@ -58,19 +58,30 @@ class SearchForm {
   }
 
   getUserSearch() {
-    let userSearch = this.inputElement.value;
+    let userSearch = this.inputElement.value;   
     return userSearch;
   }
 
   async getCompany(userSearch) {
-    this.toggleSpinner();
+    // this.toggleSpinner();
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`
     );
-    let companyObjects = await response.json();
+    let companyObjects = await response.json();    
+    this.getDetailProfile(companyObjects);
     console.log(companyObjects);
-    return companyObjects;
-    this.toggleSpinner();
-    
+    // return companyObjects;
+    // this.toggleSpinner();
+  }
+
+  async getDetailProfile(companyObjects) {
+    const companiesProfiles = companyObjects.map(async (company) => {
+      const response = await fetch(
+        `https://financialmodelingprep.com/api/v3/company/profile/${company.symbol}?apikey=${this.apiKey}`
+      );
+      return response.json();
+    });
+    const companiesDetailedProfiles = await Promise.all(companiesProfiles);
+    console.log(companiesDetailedProfiles);
   }
 }
