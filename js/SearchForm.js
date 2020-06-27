@@ -61,10 +61,13 @@ class SearchForm {
     });
   }
 
-  getUserSearch() {
-    let userSearch = this.inputElement.value;
+  getUserSearch = () => {
+    let userSearch = this.inputElement.value;    
     return userSearch;
   }
+
+  clearInput = () => this.inputElement.value = '';
+
 
   async fetchCompanyPorofile(userSearch, callback) {
     this.toggleSpinner();
@@ -81,9 +84,8 @@ class SearchForm {
     const companiesDetailedProfiles = await Promise.all(companiesProfiles);
     callback(companiesDetailedProfiles);
     this.toggleSpinner();
+    this.clearInput();
   }
 
-  toggleSpinner() {   
-    this.spinner.classList.toggle("d-none");
-  }
+  toggleSpinner = () => spinner.classList.toggle("d-none");
 }
