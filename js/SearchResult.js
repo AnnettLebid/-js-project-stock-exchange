@@ -5,12 +5,13 @@ class SearchResult {
     this.companies;
   }
 
-  createCompaniesList(companies) {
+  renderResults(companies) {   
     console.log("I am in create companies list");  
     console.log(companies) 
     let listOfCompanies = companies.map((compProfile) => {
+      const { image, companyName, changesPercentage } = compProfile.profile;
       let a = document.createElement("a");
-      document.getElementById("list").appendChild(a);
+      this.parentElement.appendChild(a);
       a.classList.add("list-group-item");
       a.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);
       console.log(compProfile.symbol)
@@ -32,7 +33,7 @@ class SearchResult {
 
       let compChangesPercentage = document.createElement("span");
       let number = changesPercentage.slice(1, -1);
-      compChangesPercentage.textContent = "(" + number + ")";
+      compChangesPercentage.textContent = `(${number})`;      
       if (number[0] === "+") {
         compChangesPercentage.classList.add("ml-2", "text-success");
       } else if (number[0] === "-") {

@@ -4,9 +4,9 @@
 
 <head>
   <meta charset="utf-8">
-  <title>ITC Template</title>
+  <title>Nasdaq Stocks</title>
   <meta name="description" content="Project Name">
-  <meta name="author" content="Fill in your name">
+  <meta name="author" content="Anna Lebid">
   <link rel="shortcut icon" type="image/png" href="./img/nasdaq.jpg" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -36,7 +36,7 @@
       console.log("created class results") 
       form.onSearch((companies) => {
         console.log("HTML in onsearch function")
-        results.createCompaniesList(companies);
+        results.renderResults(companies);
       })
     })();
   </script>
@@ -46,4 +46,6 @@
 
 
 
-<!-- <ul class="list-group list-group-flush p-0 m-0 w-100" id="list"></ul> -->
+
+
+
