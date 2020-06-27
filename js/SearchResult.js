@@ -2,15 +2,18 @@ class SearchResult {
   constructor(parentElement) {    
     this.parentElement = parentElement;
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+    this.companies;
   }
 
-  async createCompaniesList(companyObjects) {
-    console.log("I am in create companies list");   
-    let listOfCompanies = companiesDetailedProfiles.map((compProfile) => {
+  createCompaniesList(companies) {
+    console.log("I am in create companies list");  
+    console.log(companies) 
+    let listOfCompanies = companies.map((compProfile) => {
       let a = document.createElement("a");
       document.getElementById("list").appendChild(a);
       a.classList.add("list-group-item");
       a.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);
+      console.log(compProfile.symbol)
 
       let companyImage = document.createElement("img");
       companyImage.classList.add("stock-image");

@@ -2,12 +2,13 @@ class SearchForm {
   constructor(parentElement) {
     this.parentElement = parentElement;
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-    // this.spinner = document.getElementById("spinner");
-    // this.list = document.getElementById("list");
+    // this.spinner = document.getElementById("spinner");    
     this.inputElement;
-    this.button;
+    this.button;    
+    this.callback;
+    this.searchValue;
+    this.companiesDetailedProfiles;
     this.formCreation();
-    // this.callback;
   }
 
   formCreation() {
@@ -49,32 +50,29 @@ class SearchForm {
     this.parentElement.appendChild(mainWrapper);
   }
 
-  onSearch(callback) {
-    // callback(this.companyObjects);
-    console.log("Onsearch start");
-    this.button.addEventListener("click", () => {
-      this.getCompany(this.getUserSearch());
+  async onSearch(callback) {
+    console.log("on search function");
+    this.button.addEventListener("click", async () => {
+      console.log("click event");
+      await this.fetchCompanyPorofile(this.getUserSearch(), callback);      
     });
+    // 
+    // callback(this.companiesDetailedProfiles);
+    // callback(this.getDetailProfile);
   }
 
   getUserSearch() {
-    let userSearch = this.inputElement.value;   
+    let userSearch = this.inputElement.value;
     return userSearch;
   }
 
-  async getCompany(userSearch) {
+  async fetchCompanyPorofile(userSearch, callback) {
     // this.toggleSpinner();
+    console.log("in get company")
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`
     );
-    let companyObjects = await response.json();    
-    this.getDetailProfile(companyObjects);
-    console.log(companyObjects);
-    // return companyObjects;
-    // this.toggleSpinner();
-  }
-
-  async getDetailProfile(companyObjects) {
+    let companyObjects = await response.json();
     const companiesProfiles = companyObjects.map(async (company) => {
       const response = await fetch(
         `https://financialmodelingprep.com/api/v3/company/profile/${company.symbol}?apikey=${this.apiKey}`
@@ -82,6 +80,9 @@ class SearchForm {
       return response.json();
     });
     const companiesDetailedProfiles = await Promise.all(companiesProfiles);
-    console.log(companiesDetailedProfiles);
+    console.log(companiesDetailedProfiles);    
+    callback(companiesDetailedProfiles);
+    // this.toggleSpinner();
   }
 }
+

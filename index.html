@@ -25,14 +25,15 @@
   <script src="./js/SearchResult.js"></script>
   <script src="./js/SearchForm.js"></script>
   <script>
-    (async function () {
-      console.log("go to marquee")
+    (async function () {      
       const marquee = new Marquee(document.getElementById("marquee"));
-      marquee.loadMarquee();
-      console.log("go to serch form")
+      console.log("created marquee")
+      marquee.loadMarquee();   
+      console.log("loaded marquee")   
       const form = new SearchForm(document.getElementById("form"));
-      console.log("html form finished results next")
+      console.log("created form")      
       const results = new SearchResult(document.getElementById("results"));
+      console.log("created class results") 
       form.onSearch((companies) => {
         console.log("HTML in onsearch function")
         results.createCompaniesList(companies);

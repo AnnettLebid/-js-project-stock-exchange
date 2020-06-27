@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-image: url("/img/900.jpg");
+    background-image: url("../img/900.jpg");
+    background-size: cover;
     overflow: hidden;
 }
 
