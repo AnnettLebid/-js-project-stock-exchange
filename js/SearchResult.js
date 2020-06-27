@@ -1,20 +1,42 @@
 class SearchResult {
   constructor(parentElement) {    
     this.parentElement = parentElement;
-    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-    this.companies;
+    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";   
   }
 
-  renderResults(companies) {   
-    console.log("I am in create companies list");  
-    console.log(companies) 
+  renderResults(companies) { 
+    const resultsWrapper = document.createElement("div");     
+    resultsWrapper.classList.add("row", "justify-content-center"); 
+    this.parentElement.appendChild(resultsWrapper);  
+
+    const resultsContainer = document.createElement("div");
+    resultsContainer.classList.add(
+      "col-md-8",
+      "col-md-offset-5",
+      "shadow",      
+      "bg-transparent",
+      "pr-0",
+      "pl-0",
+      "rounded",
+      "mt-3"
+    );
+    resultsWrapper.appendChild(resultsContainer); 
+
+    let ul = document.createElement("ul");
+    ul.classList.add("p-0", "m-0");
+    resultsContainer.appendChild(ul);  
+
     let listOfCompanies = companies.map((compProfile) => {
-      const { image, companyName, changesPercentage } = compProfile.profile;
-      let a = document.createElement("a");
-      this.parentElement.appendChild(a);
-      a.classList.add("list-group-item");
+      const { image, companyName, changesPercentage } = compProfile.profile;  
+
+      let li = document.createElement("li");
+      li.classList.add("list-group-item", "rounded-pill", "mb-2");
+      ul.appendChild(li);
+
+      let a = document.createElement("a");    
+      a.classList.add("list-group-item-action");
       a.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);
-      console.log(compProfile.symbol)
+      li.appendChild(a);     
 
       let companyImage = document.createElement("img");
       companyImage.classList.add("stock-image");

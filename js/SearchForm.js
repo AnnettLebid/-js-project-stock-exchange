@@ -2,12 +2,9 @@ class SearchForm {
   constructor(parentElement) {
     this.parentElement = parentElement;
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-    // this.spinner = document.getElementById("spinner");    
+    this.spinner = document.getElementById("spinner");
     this.inputElement;
-    this.button;    
-    this.callback;
-    this.searchValue;
-    this.companiesDetailedProfiles;
+    this.button;        
     this.formCreation();
   }
 
@@ -22,7 +19,8 @@ class SearchForm {
       "p-3",
       "bg-white",
       "rounded",
-      "mt-3"
+      "mt-3",
+      "rounded-pill"      
     );
     const inputWrapper = document.createElement("div");
     inputWrapper.classList.add(
@@ -32,7 +30,13 @@ class SearchForm {
       "align-middle"
     );
     this.inputElement = document.createElement("input");
-    this.inputElement.classList.add("custom-input", "m-1", "d-inline", "p-2");
+    this.inputElement.classList.add(
+      "custom-input",
+      "m-1",
+      "d-inline",
+      "p-2",
+      "rounded-pill"
+    );
     this.inputElement.type = "text";
     this.inputElement.placeholder = "Search";
     this.button = document.createElement("button");
@@ -40,7 +44,8 @@ class SearchForm {
       "btn-primary",
       "btn",
       "button",
-      "align-self-center"
+      "align-self-center",
+      "rounded-pill"
     );
     this.button.innerHTML = "Search";
     mainWrapper.appendChild(mainContainer);
@@ -50,15 +55,10 @@ class SearchForm {
     this.parentElement.appendChild(mainWrapper);
   }
 
-  async onSearch(callback) {
-    console.log("on search function");
-    this.button.addEventListener("click", async () => {
-      console.log("click event");
-      await this.fetchCompanyPorofile(this.getUserSearch(), callback);      
-    });
-    // 
-    // callback(this.companiesDetailedProfiles);
-    // callback(this.getDetailProfile);
+  async onSearch(callback) {    
+    this.button.addEventListener("click", async () => {      
+      await this.fetchCompanyPorofile(this.getUserSearch(), callback);
+    });   
   }
 
   getUserSearch() {
@@ -67,8 +67,7 @@ class SearchForm {
   }
 
   async fetchCompanyPorofile(userSearch, callback) {
-    // this.toggleSpinner();
-    console.log("in get company")
+    // this.toggleSpinner();    
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`
     );
@@ -79,10 +78,8 @@ class SearchForm {
       );
       return response.json();
     });
-    const companiesDetailedProfiles = await Promise.all(companiesProfiles);
-    console.log(companiesDetailedProfiles);    
+    const companiesDetailedProfiles = await Promise.all(companiesProfiles);    
     callback(companiesDetailedProfiles);
     // this.toggleSpinner();
   }
 }
-

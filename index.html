@@ -18,24 +18,22 @@
   <div class="container p-0 justify-content-center">
     <h1 class="mt-5 text-center text-white">Search Nasdaq Stocks</h1>
     <div id="form"></div>
-    <div id="results"></div>
+    <div class="spinner-border text-light spinner mt-2 d-none" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div id="results" class=" "></div>
   </div>
   </div>
   <script src="./js/Marquee.js"></script>
   <script src="./js/SearchResult.js"></script>
   <script src="./js/SearchForm.js"></script>
   <script>
-    (async function () {      
+    (async function () {
       const marquee = new Marquee(document.getElementById("marquee"));
-      console.log("created marquee")
-      marquee.loadMarquee();   
-      console.log("loaded marquee")   
+      marquee.loadMarquee();
       const form = new SearchForm(document.getElementById("form"));
-      console.log("created form")      
       const results = new SearchResult(document.getElementById("results"));
-      console.log("created class results") 
       form.onSearch((companies) => {
-        console.log("HTML in onsearch function")
         results.renderResults(companies);
       })
     })();
@@ -43,9 +41,3 @@
 </body>
 
 </html>
-
-
-
-
-
-

@@ -5,6 +5,7 @@ body {
     background-image: url("../img/900.jpg");
     background-size: cover;
     overflow: hidden;
+    overflow-y: scroll;
 }
 
 .custom-input {
@@ -40,8 +41,6 @@ button {
 
     animation: marquee 800s linear infinite;
     background: #ffff;
-    overflow: hidden;
-
 }
 
 .marquee:hover {
@@ -61,5 +60,11 @@ button {
 .marquee-div {
     display: flex;
     height: 30px;
-    margin-left: 3px;   
+    margin-left: 3px;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    right: 50%;
 }
