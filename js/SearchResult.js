@@ -5,9 +5,7 @@ class SearchResult {
   }
 
   renderResults(companies, userSearch) {
-    this.clearResults();
-    console.log(companies);
-    console.log(userSearch);
+    this.clearResults();    
     const resultsWrapper = document.createElement("div");
     resultsWrapper.classList.add("row", "justify-content-center");
     this.parentElement.appendChild(resultsWrapper);
