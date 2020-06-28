@@ -2,10 +2,11 @@ class SearchResult {
   constructor(parentElement) {
     this.parentElement = parentElement;
     this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+    // this.compareButton = compareButton;
   }
 
   renderResults(companies, userSearch) {
-    this.clearResults();    
+    this.clearResults();
     const resultsWrapper = document.createElement("div");
     resultsWrapper.classList.add("row", "justify-content-center");
     this.parentElement.appendChild(resultsWrapper);
@@ -50,7 +51,7 @@ class SearchResult {
       a.appendChild(compName);
 
       const compSymbol = document.createElement("span");
-      compSymbol.classList.add("ml-2");  
+      compSymbol.classList.add("ml-2");
       compSymbol.innerHTML = this.highlightSearch(
         userSearch,
         `(${compProfile.symbol})`
@@ -59,9 +60,9 @@ class SearchResult {
       a.appendChild(compSymbol);
 
       let compChangesPercentage = document.createElement("span");
-      let number = changesPercentage;     
-     
-      if (number) {       
+      let number = changesPercentage;
+
+      if (number) {
         compChangesPercentage.textContent = `${number}`;
         if (number[1] === "+") {
           compChangesPercentage.classList.add("ml-2", "text-success");
@@ -71,9 +72,19 @@ class SearchResult {
           compChangesPercentage.classList.add("ml-2", "text-body");
         }
         a.appendChild(compChangesPercentage);
-      }else{
+      } else {
         return;
       }
+      const compareButton = document.createElement("button");
+      compareButton.classList.add(
+        "btn-primary",
+        "btn",
+        "button",        
+        "rounded-pill"
+      );
+      compareButton.innerHTML = "Compare";
+      compareButton.classList.add("float-right");
+      li.appendChild(compareButton);
     });
   }
 
@@ -83,7 +94,7 @@ class SearchResult {
 
   highlightSearch(searchValue, string) {
     const regex = new RegExp(searchValue, "gi");
-    if (string){
+    if (string) {
       return string.replace(
         regex,
         (match) => `<span class = "yellow">${match}</span>`

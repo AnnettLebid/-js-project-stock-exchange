@@ -73,3 +73,7 @@ button {
 .yellow {
     background-color:yellow;
 }
+
+.float-right {
+    float: right;
+}
