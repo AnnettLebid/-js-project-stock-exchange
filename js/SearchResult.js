@@ -1,8 +1,7 @@
 class SearchResult {
   constructor(parentElement) {
     this.parentElement = parentElement;
-    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-    // this.compareButton = compareButton;
+    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99"; 
   }
 
   renderResults(companies, userSearch) {
@@ -77,7 +76,7 @@ class SearchResult {
       }
       const compareButton = document.createElement("button");
       compareButton.classList.add(
-        "btn-primary",
+        "btn-info",
         "btn",
         "button",        
         "rounded-pill"
@@ -85,9 +84,14 @@ class SearchResult {
       compareButton.innerHTML = "Compare";
       compareButton.classList.add("float-right");
       li.appendChild(compareButton);
-    });
-  }
 
+      compareButton.addEventListener("click", () => {
+        console.log("click");
+        });
+    });
+    
+  }
+ 
   clearResults = () => {
     this.parentElement.innerText = "";
   };
