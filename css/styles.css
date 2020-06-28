@@ -68,3 +68,7 @@ button {
     position: fixed;
     right: 50%;
 }
+
+.yellow {
+    background-color:yellow;
+}

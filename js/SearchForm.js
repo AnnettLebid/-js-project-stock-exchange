@@ -57,7 +57,7 @@ class SearchForm {
 
   async onSearch(callback) {
     this.button.addEventListener("click", async () => {
-      await this.fetchCompanyPorofile(this.getUserSearch(), callback);
+      await this.fetchCompanyPorofile(this.getUserSearch(), callback);    
     });
   }
 
@@ -68,8 +68,9 @@ class SearchForm {
 
   clearInput = () => this.inputElement.value = '';
 
-
   async fetchCompanyPorofile(userSearch, callback) {
+    console.log(callback)
+    console.log(userSearch)
     this.toggleSpinner();
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`
@@ -81,11 +82,13 @@ class SearchForm {
       );
       return response.json();
     });
-    const companiesDetailedProfiles = await Promise.all(companiesProfiles);
-    callback(companiesDetailedProfiles);
+
+    const companiesDetailedProfiles = await Promise.all(companiesProfiles);   
+    callback(companiesDetailedProfiles, userSearch);    
     this.toggleSpinner();
     this.clearInput();
   }
+  
 
   toggleSpinner = () => spinner.classList.toggle("d-none");
 }
