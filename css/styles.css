@@ -1,4 +1,4 @@
-body {
+body,html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,6 +6,7 @@ body {
     background-size: cover;
     overflow: hidden;
     overflow-y: scroll;
+    min-width: 1049px;
 }
 
 .custom-input {
@@ -29,6 +30,10 @@ button {
     width: 40px;
     margin-right: 10px;
 }
+
+/* .logo-width {
+    width: 50%;
+} */
 
 .marquee {
     width: max-content;

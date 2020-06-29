@@ -7,8 +7,6 @@
 
   getStoredElements();
   getCompanyProfile();
-  // const fetchedvariablesStore = getCompanyProfile();
-  // makeCompProfile(fetchedvariablesStore);
   getComPriceHistory();
 
   function getStoredElements() {
@@ -19,6 +17,7 @@
     variablesStore.companyNameDomElmt = document.getElementById("comp-name");
     variablesStore.changesDomElmt = document.getElementById("changes");
     variablesStore.chartSpinner = document.getElementById("chart-spinner");
+    variablesStore.companyLogo = document.getElementById("logo");
   }
 
   async function getCompanyProfile() {
@@ -32,7 +31,7 @@
   }
 
   function makeCompProfile(data) {
-    const { companyNameDomElmt, changesDomElmt } = variablesStore;
+    const { companyNameDomElmt, changesDomElmt, companyLogo } = variablesStore;
     let {
       companyName,
       sector,
@@ -40,10 +39,11 @@
       description,
       image,
       changesPercentage,
-      website,
+      website
     } = data.profile;
 
-    document.getElementById("logo").src = image;
+    companyLogo.src = image;
+    companyLogo.classList.add("logo-width");
     companyNameDomElmt.textContent = companyName;
     companyNameDomElmt.setAttribute("href", `${website}`);
     document.getElementById("sector").textContent = sector;
