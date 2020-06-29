@@ -40,8 +40,9 @@ button {
     white-space: nowrap;
 
     animation: marquee 800s linear infinite;
+    /* color: white; */
     background: #ffff;
-}
+} 
 
 .marquee:hover {
     animation-play-state: paused;
@@ -76,4 +77,8 @@ button {
 
 .float-right {
     float: right;
+}
+
+.neon-green {
+    color: rgba(0, 255, 0, 0.829);
 }

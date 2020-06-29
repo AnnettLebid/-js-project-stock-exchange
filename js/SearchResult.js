@@ -1,10 +1,13 @@
 class SearchResult {
   constructor(parentElement) {
     this.parentElement = parentElement;
-    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99"; 
+    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+    this.compareButton;
+    this.compProfile;
   }
 
   renderResults(companies, userSearch) {
+    console.log(companies);
     this.clearResults();
     const resultsWrapper = document.createElement("div");
     resultsWrapper.classList.add("row", "justify-content-center");
@@ -28,70 +31,95 @@ class SearchResult {
     resultsContainer.appendChild(ul);
 
     let listOfCompanies = companies.map((compProfile) => {
-      const { image, companyName, changesPercentage } = compProfile.profile;
+      const {
+        image,
+        companyName,
+        changesPercentage,
+        price,
+      } = compProfile.profile;
+      if (price) {
+        //checking, if company still works and value of company price is not null
+        let li = document.createElement("li");
+        li.classList.add(
+          "list-group-item",
+          "rounded-pill",
+          "mb-2",
+          "pr-3",
+          "d-flex",
+          "align-items-center"
+        );
+        ul.appendChild(li);
 
-      let li = document.createElement("li");
-      li.classList.add("list-group-item", "rounded-pill", "mb-2");
-      ul.appendChild(li);
+        let a = document.createElement("a");
+        a.classList.add(
+          "list-group-item-action",
+          "d-flex",
+          "align-items-center"
+        );
+        a.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);
+        li.appendChild(a);
 
-      let a = document.createElement("a");
-      a.classList.add("list-group-item-action");
-      a.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);
-      li.appendChild(a);
+        let companyImage = document.createElement("img");
+        companyImage.classList.add("stock-image");
+        companyImage.src = image;
+        a.appendChild(companyImage);
 
-      let companyImage = document.createElement("img");
-      companyImage.classList.add("stock-image");
-      companyImage.src = image;
-      a.appendChild(companyImage);
+        let compName = document.createElement("span");
+        compName.classList.add("ml-1");
+        compName.innerHTML = this.highlightSearch(userSearch, companyName);
+        a.appendChild(compName);
 
-      let compName = document.createElement("span");
-      compName.classList.add("ml-1");
-      compName.innerHTML = this.highlightSearch(userSearch, companyName);
-      a.appendChild(compName);
+        const compSymbol = document.createElement("span");
+        compSymbol.classList.add("ml-2");
+        compSymbol.innerHTML = this.highlightSearch(
+          userSearch,
+          `(${compProfile.symbol})`
+        );
 
-      const compSymbol = document.createElement("span");
-      compSymbol.classList.add("ml-2");
-      compSymbol.innerHTML = this.highlightSearch(
-        userSearch,
-        `(${compProfile.symbol})`
-      );
+        a.appendChild(compSymbol);
 
-      a.appendChild(compSymbol);
+        let compChangesPercentage = document.createElement("span");
+        let number = changesPercentage;
 
-      let compChangesPercentage = document.createElement("span");
-      let number = changesPercentage;
-
-      if (number) {
-        compChangesPercentage.textContent = `${number}`;
-        if (number[1] === "+") {
-          compChangesPercentage.classList.add("ml-2", "text-success");
-        } else if (number[1] === "-") {
-          compChangesPercentage.classList.add("ml-2", "text-danger");
+        if (number) {
+          compChangesPercentage.textContent = `${number}`;
+          if (number[1] === "+") {
+            compChangesPercentage.classList.add("ml-2", "text-success");
+          } else if (number[1] === "-") {
+            compChangesPercentage.classList.add("ml-2", "text-danger");
+          } else {
+            compChangesPercentage.classList.add("ml-2", "text-body");
+          }
+          a.appendChild(compChangesPercentage);
         } else {
-          compChangesPercentage.classList.add("ml-2", "text-body");
+          return;
         }
-        a.appendChild(compChangesPercentage);
+        this.compareButton = document.createElement("button");
+        this.compareButton.classList.add(
+          "btn-info",
+          "btn",
+          "button",
+          "rounded-pill",
+          "ml-1"
+        );
+        this.compareButton.innerHTML = "Compare";
+        this.compareButton.classList.add("float-right");
+        li.appendChild(this.compareButton);
+        this.onCompareButton(compProfile);
       } else {
         return;
       }
-      const compareButton = document.createElement("button");
-      compareButton.classList.add(
-        "btn-info",
-        "btn",
-        "button",        
-        "rounded-pill"
-      );
-      compareButton.innerHTML = "Compare";
-      compareButton.classList.add("float-right");
-      li.appendChild(compareButton);
-
-      compareButton.addEventListener("click", () => {
-        console.log("click");
-        });
     });
     
   }
- 
+
+  onCompareButton(company) {
+    this.compareButton.addEventListener("click", () => {
+      console.log(company);
+    });
+
+  }
+
   clearResults = () => {
     this.parentElement.innerText = "";
   };

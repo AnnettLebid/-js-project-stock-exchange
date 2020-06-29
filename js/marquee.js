@@ -28,7 +28,7 @@ class Marquee {
 
     const divPrice = document.createElement("div");
     divPrice.textContent = `${company.price}$ `;
-    divPrice.classList.add("text-success");
+    divPrice.classList.add("neon-green");
 
     marqueeContainer.append(divSymbol, divPrice);
     this.parentElement.appendChild(marqueeContainer);

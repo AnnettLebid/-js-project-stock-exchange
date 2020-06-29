@@ -89,3 +89,4 @@ class SearchForm {
 
   toggleSpinner = () => spinner.classList.toggle("d-none");
 }
+
