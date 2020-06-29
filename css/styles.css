@@ -33,6 +33,7 @@ button {
 .marquee {
     width: max-content;
     box-sizing: border-box;
+    overflow: hidden;
     display: flex;
     align-items: center;
     position: relative;
@@ -50,7 +51,7 @@ button {
 
 @keyframes marquee {
     0% {
-        transform: translate(0, 0);
+        transform: translate(0, -100);
     }
 
     100% {

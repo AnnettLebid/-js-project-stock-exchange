@@ -6,7 +6,7 @@ class SearchResult {
     this.compProfile;
   }
 
-  renderResults(companies, userSearch) {   
+  renderResults(companies, userSearch, callback) {   
     this.clearResults();
     const resultsWrapper = document.createElement("div");
     resultsWrapper.classList.add("row", "justify-content-center");
@@ -106,7 +106,7 @@ class SearchResult {
         li.appendChild(this.compareButton);
         this.onCompareButton(compProfile);
       } else {
-        return;
+        return
       }
     });
     
@@ -116,7 +116,6 @@ class SearchResult {
     this.compareButton.addEventListener("click", () => {
       console.log(company);
     });
-
   }
 
   clearResults = () => {
