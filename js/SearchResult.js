@@ -29,7 +29,7 @@ class SearchResult {
     ul.classList.add("p-0", "m-0");
     resultsContainer.appendChild(ul);
 
-    let listOfCompanies = companies.map((compProfile) => {
+    let listOfCompanies = companies.forEach((compProfile) => {
       const {
         image,
         companyName,
