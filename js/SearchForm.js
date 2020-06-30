@@ -45,7 +45,8 @@ class SearchForm {
       "btn",
       "button",
       "align-self-center",
-      "rounded-pill"
+      "rounded-pill",
+      "mr-1"
     );
     this.button.innerHTML = "Search";
     mainWrapper.appendChild(mainContainer);
@@ -57,36 +58,41 @@ class SearchForm {
 
   async onSearch(callback) {
     this.button.addEventListener("click", async () => {
-      await this.fetchCompanyPorofile(this.getUserSearch(), callback);    
+      await this.fetchCompanyPorofile(this.getUserSearch(), callback);
     });
   }
 
   getUserSearch = () => {
     let userSearch = this.inputElement.value;    
     return userSearch;
+  };
+
+  clearInput = () => (this.inputElement.value = "");
+
+  async fetchCompanyPorofile(userSearch, callback) {
+    if (userSearch) {
+      this.toggleSpinner();
+      let response = await fetch(
+        `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`
+      );
+      let companyObjects = await response.json();
+      const companiesProfiles = companyObjects.map(async (company) => {
+        const response = await fetch(
+          `https://financialmodelingprep.com/api/v3/company/profile/${company.symbol}?apikey=${this.apiKey}`
+        );
+        return response.json();
+      });
+
+      const companiesDetailedProfiles = await Promise.all(companiesProfiles);
+      callback(companiesDetailedProfiles, userSearch);
+      this.toggleSpinner();
+      this.clearInput();
+    }
   }
 
-  clearInput = () => this.inputElement.value = '';
-
-  async fetchCompanyPorofile(userSearch, callback) {    
-    this.toggleSpinner();
-    let response = await fetch(
-      `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`
-    );
-    let companyObjects = await response.json();
-    const companiesProfiles = companyObjects.map(async (company) => {
-      const response = await fetch(
-        `https://financialmodelingprep.com/api/v3/company/profile/${company.symbol}?apikey=${this.apiKey}`
-      );
-      return response.json();
-    });
-
-    const companiesDetailedProfiles = await Promise.all(companiesProfiles);   
-    callback(companiesDetailedProfiles, userSearch);    
-    this.toggleSpinner();
-    this.clearInput();
-  }  
+  clearResults = () => {
+    this.parentElement.innerText = "";
+  };
 
   toggleSpinner = () => spinner.classList.toggle("d-none");
 }
-
