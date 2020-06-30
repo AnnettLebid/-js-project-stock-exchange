@@ -63,7 +63,8 @@ class SearchForm {
   }
 
   getUserSearch = () => {
-    let userSearch = this.inputElement.value;    
+    let userSearch = this.inputElement.value;
+    
     return userSearch;
   };
 

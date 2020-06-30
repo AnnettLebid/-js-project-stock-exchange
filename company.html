@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/companyProfile.css">
-    <title>Document</title>
+    <title>Company</title>
 </head>
 
 <body>
     <div class="container mt-3">
+        <div id = 'compInfo'></div>
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card mt-5 mb-3 mt-sm-0 shadow">
@@ -22,7 +23,7 @@
                         </div>
                         <div>
                             <span class="text-primary pl-1 pr-1 line-ht text-height-22"><a id="comp-name"></a></span>
-                            <span class="text-primary ml-3 pl-1 line-ht text-height-22" id="sector"></span>
+                            <span class="text-primary ml-3 pl-1 line-ht text-height-22" id="sector-element"></span>
                         </div>
                     </div>
                     <div class="card-body">
@@ -44,7 +45,15 @@
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="./js/company.js"></script>
+    <script src="./js/CompanyInfo.js"></script>
+    <script>
+        (async function () {
+            const params = new URLSearchParams(location.search);
+            const symbol = params.get('symbol');
+            const compInfo = new CompanyInfo(document.getElementById('compInfo'), symbol);
+            await compInfo.load();            
+        })();
+    </script>
 </body>
 
 </html>
