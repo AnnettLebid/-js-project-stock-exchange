@@ -11,7 +11,7 @@ class Marquee {
     });
   }
 
-  async getStockPriceData() {   
+  async getStockPriceData() {
     let response = await fetch(
       `https://financialmodelingprep.com/api/v3/quotes/nyse?apikey=${this.apiKey}`
     );
@@ -19,18 +19,20 @@ class Marquee {
     return data.slice(0, 200);
   }
 
-  createMarquee(company) {   
-    const marqueeContainer = document.createElement("div");
-    marqueeContainer.classList.add("marquee-div", "p-1");
+  createMarquee(company) {
+    if (company.price) {
+      const marqueeContainer = document.createElement("div");
+      marqueeContainer.classList.add("marquee-div", "p-1");
 
-    const divSymbol = document.createElement("div");
-    divSymbol.textContent = `${company.symbol}: `;
+      const divSymbol = document.createElement("div");
+      divSymbol.textContent = `${company.symbol}: `;
 
-    const divPrice = document.createElement("div");
-    divPrice.textContent = `${company.price}$ `;
-    divPrice.classList.add("neon-green");
+      const divPrice = document.createElement("div");
+      divPrice.textContent = `${company.price}$ `;
+      divPrice.classList.add("neon-green", "ml-1");
 
-    marqueeContainer.append(divSymbol, divPrice);
-    this.parentElement.appendChild(marqueeContainer);
+      marqueeContainer.append(divSymbol, divPrice);
+      this.parentElement.appendChild(marqueeContainer);
+    }
   }
 }

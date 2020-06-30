@@ -63,6 +63,7 @@ button {
 
 .marquee:hover {
     animation-play-state: paused;
+    cursor: pointer;
 }
 
 @keyframes marquee {

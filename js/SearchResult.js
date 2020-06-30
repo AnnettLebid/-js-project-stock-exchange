@@ -6,7 +6,7 @@ class SearchResult {
     this.compProfile;
   }
 
-  renderResults(companies, userSearch, callback) {   
+  renderResults(companies, userSearch) {   
     this.clearResults();
     const resultsWrapper = document.createElement("div");
     resultsWrapper.classList.add("row", "justify-content-center");
