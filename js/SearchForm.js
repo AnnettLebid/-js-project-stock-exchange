@@ -63,7 +63,7 @@ class SearchForm {
   }
 
   getUserSearch() {
-    let userSearch = this.inputElement.value;
+    const userSearch = this.inputElement.value;
     return userSearch;
   }
 
@@ -71,13 +71,23 @@ class SearchForm {
     this.inputElement.value = "";
   }
 
+  // newFetch(userSearch, callback) {
+  //   fetch(`http://localhost:3000/search?query=${userSearch}`)
+  //     .then((response) => response.json)
+  //     .then((data) => {
+  //       callback(data, userSearch);
+  //       this.toggleSpinner();
+  //       this.clearInput();
+  //     });
+  // }
+
   async fetchCompanyPorofile(userSearch, callback) {
     if (userSearch) {
       this.toggleSpinner();
-      let response = await fetch(
+      const response = await fetch(
         `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`
       );
-      let companyObjects = await response.json();
+      const companyObjects = await response.json();
       const companiesProfiles = companyObjects.map(async (company) => {
         const response = await fetch(
           `https://financialmodelingprep.com/api/v3/company/profile/${company.symbol}?apikey=${this.apiKey}`
@@ -96,5 +106,7 @@ class SearchForm {
     this.parentElement.innerText = "";
   }
 
-  toggleSpinner = () => spinner.classList.toggle("d-none");
+  toggleSpinner() {
+    spinner.classList.toggle("d-none");
+  }
 }

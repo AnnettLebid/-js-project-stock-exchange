@@ -11,21 +11,17 @@ body,html {
 
 body::-webkit-scrollbar {
     display: none;
-  }
+}
   
-
 .custom-input {
     height: 40px;
     width: 80%;
 }
 
-
-
 input:focus {
 
    outline-width: 0;
 }
-
 
 button {
     height: 40px;
@@ -43,8 +39,6 @@ button {
     width: auto;
     margin-right: 10px;
 }
-
-
 
 .marquee {
     width: max-content;

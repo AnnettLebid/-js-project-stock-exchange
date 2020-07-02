@@ -13,7 +13,6 @@ body {
 .chart-spinner {
     position: fixed;
     top: 100px;
-    left: 680px;
 }
 
 .stock-image {
@@ -21,4 +20,3 @@ body {
     width: 40px;
     margin-right: 10px;
 }
-

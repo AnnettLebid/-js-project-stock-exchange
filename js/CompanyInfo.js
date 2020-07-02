@@ -9,6 +9,7 @@ class CompanyInfo {
     this.companies.graph = {};
     this.companies.graph.xYears = [];
     this.companies.graph.yPrices = [];
+    this.row;
   }
 
   cardCreation() {
@@ -72,21 +73,19 @@ class CompanyInfo {
     this.changes = document.createElement("span");
     this.changes.id = "changes";
     this.stockPriceWrapper.append(this.price, this.changes);
-
     this.description = document.createElement("div");
     this.description.classList.add("mb-3");
     this.description.id = "description";
     this.cardBody.append(this.stockPriceWrapper, this.description);
-
     this.canvas = document.createElement("canvas");
     this.card.append(this.cardHeader, this.cardBody, this.canvas);
   }
 
-  spinnerCreation() {
+  spinnerCreation() {    
     this.chartSpinner = document.createElement("div");
     this.chartSpinner.classList.add(
       "custom-spinner",
-      // "d-none",
+      "d-none",
       "chart-spinner",
       "align-self-center"
     );
@@ -94,19 +93,20 @@ class CompanyInfo {
     this.spinnerDiv = document.createElement("div");
     this.spinnerDiv.classList.add("spinner-border", "text-primary");
     this.chartSpinner.appendChild(this.spinnerDiv);
+    this.row.appendChild(this.chartSpinner);
   }
 
   async getCompanyProfile() {
-    let response = await fetch(
+    const response = await fetch(
       `https://financialmodelingprep.com/api/v3/company/profile/${this.symbol}?apikey=${this.apiKey}`
     );
-    let data = await response.json();
+    const data = await response.json();
     this.makeCompProfile(data);
     return data;
   }
 
   makeCompProfile(data) {
-    let {
+    const {
       companyName,
       sector,
       price,
@@ -133,17 +133,17 @@ class CompanyInfo {
 
   async getComPriceHistory() {
     this.turnSpinnerOn();
-    let response = await fetch(
+    const response = await fetch(
       `https://financialmodelingprep.com/api/v3/historical-price-full/${this.symbol}?serietype=line&apikey=${this.apiKey}`
     );
-    let data = await response.json();
-    let priceHistory = data.historical;
+    const data = await response.json();
+    const priceHistory = data.historical;
     for (let i = 0; i < priceHistory.length; i += 100) {
       this.companies.graph.xYears.unshift(priceHistory[i].date);
       this.companies.graph.yPrices.unshift(priceHistory[i].close);
     }
-    let xYears = this.companies.graph.xYears;
-    let yPrices = this.companies.graph.yPrices;
+    const xYears = this.companies.graph.xYears;
+    const yPrices = this.companies.graph.yPrices;
     await this.addChart(xYears, yPrices);
   }
 
@@ -159,7 +159,7 @@ class CompanyInfo {
     this.canvas.getContext("2d");
     this.canvas.width = 800;
     this.canvas.height = 400;
-    let chart = new Chart(this.canvas, {
+    const chart = new Chart(this.canvas, {
       type: "line",
       data: {
         labels: years,
