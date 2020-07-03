@@ -36,8 +36,7 @@ class SearchResult {
         changesPercentage,
         price,
       } = compProfile.profile;
-      if (price) {
-        //checking, if company still works and value of company price is not null
+      if (price) {  
         let li = document.createElement("li");
         li.classList.add(
           "list-group-item",

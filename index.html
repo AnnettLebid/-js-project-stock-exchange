@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <title>Nasdaq Stocks</title>
-  <meta name="description" content="Project Name">
+  <meta name="description" content="Stock Exchange">
   <meta name="author" content="Anna Lebid">
   <link rel="shortcut icon" type="image/png" href="./img/nasdaq.jpg" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -16,7 +16,6 @@
 <body>
   <div class="container-fluid p-0 justify-content-center">
     <div class="marquee" id="marquee"></div>
-    <!-- <div class="container-fluid p-0 justify-content-center"> -->
     <h1 class="mt-5 text-center text-white">Search Nasdaq Stocks</h1>
     <div id="form"></div>
     <div class="spinner-border text-info spinner mt-2 d-none" role="status" id="spinner">
@@ -36,10 +35,7 @@
       const results = new SearchResult(document.getElementById("results"));
       form.onSearch((companies, query) => {
         results.renderResults(companies, query);
-      })
-      // results.renderResults((company) => {
-      //   form.fetchCompanyPorofile(company)
-      // });
+      })    
     })();
   </script>
 </body>

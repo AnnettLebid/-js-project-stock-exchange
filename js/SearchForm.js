@@ -58,7 +58,7 @@ class SearchForm {
 
   async onSearch(callback) {
     this.button.addEventListener("click", async () => {
-      await this.fetchCompanyPorofile(this.getUserSearch(), callback);
+      await this.fetchToInternalServer(this.getUserSearch(), callback);
     });
   }
 
@@ -71,35 +71,16 @@ class SearchForm {
     this.inputElement.value = "";
   }
 
-  // newFetch(userSearch, callback) {
-  //   fetch(`http://localhost:3000/search?query=${userSearch}`)
-  //     .then((response) => response.json)
-  //     .then((data) => {
-  //       callback(data, userSearch);
-  //       this.toggleSpinner();
-  //       this.clearInput();
-  //     });
-  // }
-
-  async fetchCompanyPorofile(userSearch, callback) {
-    if (userSearch) {
-      this.toggleSpinner();
-      const response = await fetch(
-        `https://financialmodelingprep.com/api/v3/search?query=${userSearch}&limit=10&exchange=NASDAQ&apikey=${this.apiKey}`
-      );
-      const companyObjects = await response.json();
-      const companiesProfiles = companyObjects.map(async (company) => {
-        const response = await fetch(
-          `https://financialmodelingprep.com/api/v3/company/profile/${company.symbol}?apikey=${this.apiKey}`
-        );
-        return response.json();
-      });
-
-      const companiesDetailedProfiles = await Promise.all(companiesProfiles);
-      callback(companiesDetailedProfiles, userSearch);
-      this.toggleSpinner();
-      this.clearInput();
-    }
+  async fetchToInternalServer(userSearch, callback) {
+    this.toggleSpinner();
+    console.log("go to server");
+    const response = await fetch(
+      `http://localhost:3000/search?query=${userSearch}`
+    );
+    const data = await response.json();
+    callback(data, userSearch);
+    this.toggleSpinner();
+    this.clearInput();
   }
 
   clearResults() {
