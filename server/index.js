@@ -2,7 +2,7 @@ const express = require("express");
 const fetch = require("node-fetch");
 const cors = require("cors");
 const MongoClient = require("mongodb").MongoClient;
-const assert = require('assert');
+let searchCollection;
 
 const app = express();
 const port = 3000;
@@ -37,39 +37,35 @@ async function searchNasdaqWithProfile(searchTerm) {
   return companiesWithProfiles;
 }
 
-
 app.listen(3000, function () {
-    console.log("Connected succesfully to server");
+  console.log("Connected succesfully to server");
 });
 
-const dbName = 'nasdaqapi';
+const dbName = "nasdaqapi";
 
 MongoClient.connect(
-    `mongodb://localhost:27017/nasdaqapi`, 
-    { useUnifiedTopology: true },
-    function (err, client) {
-      if (err) {
-        return console.log(err);
-      }
-      let db = client.db(dbName);
-      db.collection('search')      
+  `mongodb://localhost:27017/nasdaqapi`,
+  { useUnifiedTopology: true },
+  function (err, client) {
+    if (err) {
+      return console.log(err);
+    } else {
+      console.log("Connected to database");
     }
-  );
+    const db = client.db(dbName);
+    searchCollection = db.collection("search");
+  }
+);
 
 app.get("/search", (req, res) => {
-  const searchQuery = req.query.query; 
-  // do fetch to stocks api, and send the data to the response
+  const searchQuery = req.query.query;
   searchNasdaqWithProfile(searchQuery).then((companiesWithProfiles) => {
-    db.createCollection("search").insert({
+    searchCollection.insertOne({
       date: Date(),
       query: searchQuery,
       companies: companiesWithProfiles,
-    });  
-    res.send(companiesWithProfiles);    
+    });
+    // console.log("add profile");
+    res.send(companiesWithProfiles);
   });
-  
 });
-
-
-
-
