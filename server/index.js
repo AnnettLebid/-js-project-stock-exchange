@@ -12,6 +12,10 @@ app.use(cors());
 const apiKey = "ed93f3e229380c530b7a0e7663f86b99";
 const baseUrl = "https://financialmodelingprep.com/api/v3";
 
+app.listen(3000, function () {
+  console.log("Connected succesfully to server");
+});
+
 async function searchNasdaq(searchTerm) {
   const response = await fetch(
     `${baseUrl}/search?query=${searchTerm}&limit=10&exchange=NASDAQ&apikey=${apiKey}`
@@ -37,10 +41,6 @@ async function searchNasdaqWithProfile(searchTerm) {
   return companiesWithProfiles;
 }
 
-app.listen(3000, function () {
-  console.log("Connected succesfully to server");
-});
-
 const dbName = "nasdaqapi";
 
 MongoClient.connect(
@@ -65,7 +65,19 @@ app.get("/search", (req, res) => {
       query: searchQuery,
       companies: companiesWithProfiles,
     });
-    // console.log("add profile");
     res.send(companiesWithProfiles);
   });
+});
+
+app.get("/search-history", (req, res) => {
+  const sortByDate = { date: 1 };
+  searchCollection
+    .find()
+    .sort(sortByDate)
+    .toArray(function (err, result) {
+      if (err) throw err;
+      console.log(result);
+      res.send(JSON.stringify(result));
+      db.close();
+    });
 });

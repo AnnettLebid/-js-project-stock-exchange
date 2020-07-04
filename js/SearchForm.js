@@ -73,7 +73,6 @@ class SearchForm {
 
   async fetchToInternalServer(userSearch, callback) {
     this.toggleSpinner();
-    console.log("go to server");
     const response = await fetch(
       `http://localhost:3000/search?query=${userSearch}`
     );
