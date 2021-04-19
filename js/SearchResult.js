@@ -112,12 +112,6 @@ class SearchResult {
     
   }
 
-  onCompareButton(company) {
-    this.infoButton.addEventListener("click", () => {
-      console.log(company);
-    });
-  }
-
   clearResults = () => {
     this.parentElement.innerText = "";
   };

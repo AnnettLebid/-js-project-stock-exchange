@@ -76,8 +76,7 @@ app.get("/search-history", (req, res) => {
     .find()
     .sort(sortByDate)
     .toArray(function (err, result) {
-      if (err) throw err;
-      console.log(result);
+      if (err) throw err;      
       res.send(JSON.stringify(result));
       db.close();
     });
