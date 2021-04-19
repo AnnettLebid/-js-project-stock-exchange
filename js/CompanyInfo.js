@@ -1,6 +1,6 @@
 class CompanyInfo {
   constructor(parentElement, symbol) {
-    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+    this.apiKey = config.SECRET_API_KEY;
     this.parentElement = parentElement;
     this.symbol = symbol;
     this.cardCreation();

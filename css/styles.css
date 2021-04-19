@@ -1,4 +1,5 @@
-body,html {
+body,
+html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -12,7 +13,7 @@ body,html {
 body::-webkit-scrollbar {
     display: none;
 }
-  
+
 .custom-input {
     height: 40px;
     width: 80%;
@@ -20,7 +21,7 @@ body::-webkit-scrollbar {
 
 input:focus {
 
-   outline-width: 0;
+    outline-width: 0;
 }
 
 button {
@@ -53,7 +54,7 @@ button {
     animation: marquee 800s linear infinite;
     /* color: white; */
     background: #ffff;
-} 
+}
 
 .marquee:hover {
     animation-play-state: paused;
@@ -84,7 +85,7 @@ button {
 }
 
 .yellow {
-    background-color:yellow;
+    background-color: yellow;
 }
 
 .float-right {
@@ -93,4 +94,8 @@ button {
 
 .neon-green {
     color: rgba(0, 255, 0, 0.829);
+}
+
+.btn-width {
+    width: 20%;
 }

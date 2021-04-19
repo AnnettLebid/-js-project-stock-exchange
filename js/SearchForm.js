@@ -1,7 +1,6 @@
 class SearchForm {
   constructor(parentElement) {
-    this.parentElement = parentElement;
-    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+    this.parentElement = parentElement;    
     this.spinner = document.getElementById("spinner");
     this.inputElement;
     this.button;

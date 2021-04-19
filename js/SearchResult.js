@@ -1,8 +1,7 @@
 class SearchResult {
   constructor(parentElement) {
-    this.parentElement = parentElement;
-    this.apiKey = "ed93f3e229380c530b7a0e7663f86b99";
-    this.compareButton;
+    this.parentElement = parentElement;    
+    this.infoButton;
     this.compProfile;
   }
 
@@ -92,17 +91,19 @@ class SearchResult {
         } else {
           return;
         }
-        this.compareButton = document.createElement("button");
-        this.compareButton.classList.add(
+        this.infoButton = document.createElement("a");
+        this.infoButton.classList.add(
           "btn-info",
           "btn",
           "button",
+          "btn-width",
           "rounded-pill",
           "ml-1"
         );
-        this.compareButton.innerHTML = "Compare";
-        this.compareButton.classList.add("float-right");
-        li.appendChild(this.compareButton);
+        this.infoButton.innerHTML = "Information";
+        this.infoButton.classList.add("float-right");
+        this.infoButton.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);
+        li.appendChild(this.infoButton);
         this.onCompareButton(compProfile);
       } else {
         return
@@ -112,7 +113,7 @@ class SearchResult {
   }
 
   onCompareButton(company) {
-    this.compareButton.addEventListener("click", () => {
+    this.infoButton.addEventListener("click", () => {
       console.log(company);
     });
   }

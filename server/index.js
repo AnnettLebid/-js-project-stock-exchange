@@ -1,6 +1,7 @@
 const express = require("express");
 const fetch = require("node-fetch");
 const cors = require("cors");
+const config = require("./config");
 const MongoClient = require("mongodb").MongoClient;
 let searchCollection;
 
@@ -9,7 +10,7 @@ const port = 3000;
 
 app.use(cors());
 
-const apiKey = "ed93f3e229380c530b7a0e7663f86b99";
+const apiKey = config.SECRET_API_KEY;;
 const baseUrl = "https://financialmodelingprep.com/api/v3";
 
 app.listen(3000, function () {
