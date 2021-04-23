@@ -6,14 +6,14 @@ const MongoClient = require("mongodb").MongoClient;
 let searchCollection;
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT ||3000;
 
 app.use(cors());
 
 const apiKey = config.SECRET_API_KEY;
 const baseUrl = "https://financialmodelingprep.com/api/v3";
 
-app.listen(3000, function () {
+app.listen(PORT, function () {
   console.log("Connected succesfully to server");
 });
 
