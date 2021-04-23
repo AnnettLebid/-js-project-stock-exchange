@@ -10,7 +10,7 @@ const port = 3000;
 
 app.use(cors());
 
-const apiKey = config.SECRET_API_KEY;;
+const apiKey = config.SECRET_API_KEY;
 const baseUrl = "https://financialmodelingprep.com/api/v3";
 
 app.listen(3000, function () {
