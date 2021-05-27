@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT ||3000;
 
 app.use(cors());
+app.use(express.static('client'));
 
 const apiKey = config.SECRET_API_KEY;
 const baseUrl = "https://financialmodelingprep.com/api/v3";
