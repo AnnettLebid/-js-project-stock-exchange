@@ -73,7 +73,8 @@ class SearchForm {
   async fetchToInternalServer(userSearch, callback) {
     this.toggleSpinner();
     const response = await fetch(
-      `http://localhost:3000/search?query=${userSearch}`
+      // `http://localhost:3000/search?query=${userSearch}`
+      `https://js-stock-exchange.herokuapp.com/api/search?query=${search}`
     );
     const data = await response.json();
     callback(data, userSearch);
