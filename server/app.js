@@ -59,18 +59,6 @@ MongoClient.connect(
   }
 );
 
-app.get("/search", (req, res) => {
-  const searchQuery = req.query.query;
-  searchNasdaqWithProfile(searchQuery).then((companiesWithProfiles) => {
-    searchCollection.insertOne({
-      date: Date(),
-      query: searchQuery,
-      companies: companiesWithProfiles,
-    });
-    res.send(companiesWithProfiles);
-  });
-});
-
 app.get("/search-history", (req, res) => {
   const sortByDate = { date: 1 };
   searchCollection
