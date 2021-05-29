@@ -28,7 +28,7 @@ class SearchResult {
     ul.classList.add("p-0", "m-0");
     resultsContainer.appendChild(ul);
 
-    let listOfCompanies = companies.forEach((compProfile) => {
+    let listOfCompanies = companies.forEach((compProfile) => {    
       const {
         image,
         companyName,
@@ -104,7 +104,7 @@ class SearchResult {
         this.infoButton.classList.add("float-right");
         this.infoButton.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);
         li.appendChild(this.infoButton);
-        this.onCompareButton(compProfile);
+        // this.onCompareButton(compProfile);
       } else {
         return
       }
