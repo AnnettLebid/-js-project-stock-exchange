@@ -135,16 +135,21 @@ class CompanyInfo {
     this.description.textContent = description;
   }
 
+  async fetchPriceHistoryToServer() {     
+    const response = await fetch(
+      `http://localhost:3000/historical-price-full/?query=${this.symbol}`          
+    );
+    const companyPriceHistory = await response.json();      
+    return companyPriceHistory;   
+  }
+
   async getComPriceHistory() {
     this.turnSpinnerOn();
-    const response = await fetch(
-      `https://financialmodelingprep.com/api/v3/historical-price-full/${this.symbol}?serietype=line&apikey=${this.apiKey}`
-    );
-    const data = await response.json();
-    const priceHistory = data.historical;
-    for (let i = 0; i < priceHistory.length; i += 100) {
-      this.companies.graph.xYears.unshift(priceHistory[i].date);
-      this.companies.graph.yPrices.unshift(priceHistory[i].close);
+    const priceData = await this.fetchPriceHistoryToServer();    
+
+    for (let i = 0; i < priceData.length; i += 100) {
+      this.companies.graph.xYears.unshift(priceData[i].date);
+      this.companies.graph.yPrices.unshift(priceData[i].close);
     }
     const xYears = this.companies.graph.xYears;
     const yPrices = this.companies.graph.yPrices;
@@ -185,6 +190,6 @@ class CompanyInfo {
 
   load() {
     this.getCompanyProfile();
-    // this.getComPriceHistory();
+    this.getComPriceHistory();
   }
 }

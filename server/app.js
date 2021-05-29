@@ -42,7 +42,7 @@ app.get("/search", (req, res) => {
 
 async function getStockPriceData() {   
   const response = await fetch(
-    `https://financialmodelingprep.com/api/v3/quotes/nyse?apikey=${apiKey}`
+    `${baseUrl}/quotes/nyse?apikey=${apiKey}`   
   );
   const data = await response.json();
   return data;
@@ -57,7 +57,7 @@ app.get("/stock-price", (req, res) => {
 
 async function getCompanyProfile(symbol) {
   const response = await fetch(
-    `https://financialmodelingprep.com/api/v3/company/profile/${symbol}?apikey=${apiKey}`
+    `${baseUrl}/company/profile/${symbol}?apikey=${apiKey}`
   );
   const data = await response.json();  
   return data;
@@ -69,11 +69,27 @@ async function fetchCompanyProfile(symbol) {
   );
   const data = await response.json();
   return data;
-}
+};
 
 app.get("/company-profile", (req, res) => {
   const compSymbol = req.query.query;    
   getCompanyProfile(compSymbol).then((companyProfile) => {
   res.send(companyProfile);
+  });
+});
+
+async function getComPriceHistory(symbol) {  
+  const response = await fetch(
+    `${baseUrl}/historical-price-full/${symbol}?serietype=line&apikey=${apiKey}`
+  );
+  const prise = await response.json();
+  const priceHistory = prise.historical;
+  return priceHistory;
+};
+
+app.get("/historical-price-full", (req, res) => {
+  const compSymbol = req.query.query;
+  getComPriceHistory(compSymbol).then((companyPriceHistory) => {
+  res.send(companyPriceHistory);
   });
 });
