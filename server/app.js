@@ -1,14 +1,16 @@
 const express = require("express");
 const fetch = require("node-fetch");
 const cors = require("cors");
-const config = require("./config");
+// const config = require("./config");
+require('dotenv').config();
+
 const app = express();
 const PORT = process.env.PORT ||3000;
 
 app.use(cors());
 app.use(express.static('client'));
 
-const apiKey = config.SECRET_API_KEY;
+const apiKey = process.env.SECRET_API_KEY;
 const baseUrl = "https://financialmodelingprep.com/api/v3";
 
 app.listen(PORT, function () {
