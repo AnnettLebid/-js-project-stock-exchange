@@ -1,7 +1,6 @@
 const express = require("express");
 const fetch = require("node-fetch");
 const cors = require("cors");
-// const config = require("./config");
 require('dotenv').config();
 
 const app = express();
@@ -23,7 +22,46 @@ async function searchNasdaq(searchTerm) {
   );
   const data = await response.json();
   return data;
-}
+};
+
+async function searchNasdaqWithProfile(searchTerm) {
+  const companies = await searchNasdaq(searchTerm);
+  const fetchCompaniesProfiles = companies.map((company) => {
+    return fetchCompanyProfile(company.symbol);
+  });
+  const companiesWithProfiles = await Promise.all(fetchCompaniesProfiles);
+  return companiesWithProfiles;
+};
+
+app.get("/search", (req, res) => {
+  const searchQuery = req.query.query;
+  searchNasdaqWithProfile(searchQuery).then((companiesWithProfiles) => {
+    res.send(companiesWithProfiles);
+  });
+});
+
+async function getStockPriceData() {   
+  const response = await fetch(
+    `https://financialmodelingprep.com/api/v3/quotes/nyse?apikey=${apiKey}`
+  );
+  const data = await response.json();
+  return data;
+};
+
+app.get("/stock-price", (req, res) => {
+  getStockPriceData().then((stockPriceData) => {    
+    const stockPrices = stockPriceData.slice(0, 200)  
+    res.send(stockPrices);
+  });  
+});
+
+async function getCompanyProfile(symbol) {
+  const response = await fetch(
+    `https://financialmodelingprep.com/api/v3/company/profile/${symbol}?apikey=${apiKey}`
+  );
+  const data = await response.json();  
+  return data;
+};
 
 async function fetchCompanyProfile(symbol) {
   const response = await fetch(
@@ -33,33 +71,9 @@ async function fetchCompanyProfile(symbol) {
   return data;
 }
 
-async function searchNasdaqWithProfile(searchTerm) {
-  const companies = await searchNasdaq(searchTerm);
-  const fetchCompaniesProfiles = companies.map((company) => {
-    return fetchCompanyProfile(company.symbol);
-  });
-  const companiesWithProfiles = await Promise.all(fetchCompaniesProfiles);
-  return companiesWithProfiles;
-}
-
-async function getStockPriceData() {   
-  const response = await fetch(
-    `https://financialmodelingprep.com/api/v3/quotes/nyse?apikey=${apiKey}`
-  );
-  const data = await response.json();
-  return data;
-}
-
-app.get("/stock-price", (req, res) => {
-  getStockPriceData().then((stockPriceData) => {    
-    const stockPrices = stockPriceData.slice(0, 200)  
-    res.send(stockPrices);
-  });  
-});
-
-app.get("/search", (req, res) => {
-  const searchQuery = req.query.query;
-  searchNasdaqWithProfile(searchQuery).then((companiesWithProfiles) => {
-    res.send(companiesWithProfiles);
+app.get("/company-profile", (req, res) => {
+  const compSymbol = req.query.query;    
+  getCompanyProfile(compSymbol).then((companyProfile) => {
+  res.send(companyProfile);
   });
 });

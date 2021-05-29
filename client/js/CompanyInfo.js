@@ -96,13 +96,17 @@ class CompanyInfo {
     this.row.appendChild(this.chartSpinner);
   }
 
-  async getCompanyProfile() {
+  async fetchCompProfileToServer() {     
     const response = await fetch(
-      `https://financialmodelingprep.com/api/v3/company/profile/${this.symbol}?apikey=${this.apiKey}`
+      `http://localhost:3000/company-profile/?query=${this.symbol}`          
     );
-    const data = await response.json();
-    this.makeCompProfile(data);
-    return data;
+    const companyData = await response.json();
+    return companyData;   
+  }
+
+  async getCompanyProfile() {
+    const companyProfile = await this.fetchCompProfileToServer();
+    this.makeCompProfile(companyProfile);
   }
 
   makeCompProfile(data) {
@@ -181,6 +185,6 @@ class CompanyInfo {
 
   load() {
     this.getCompanyProfile();
-    this.getComPriceHistory();
+    // this.getComPriceHistory();
   }
 }
