@@ -43,6 +43,22 @@ async function searchNasdaqWithProfile(searchTerm) {
   return companiesWithProfiles;
 }
 
+const dbName = "nasdaqapi";
+
+MongoClient.connect(
+  `mongodb://localhost:27017/nasdaqapi`,
+  { useUnifiedTopology: true },
+  function (err, client) {
+    if (err) {
+      return console.log(err);
+    } else {
+      console.log("Connected to database");
+    }
+    const db = client.db(dbName);
+    searchCollection = db.collection("search");
+  }
+);
+
 app.get("/search-history", (req, res) => {
   const sortByDate = { date: 1 };
   searchCollection
