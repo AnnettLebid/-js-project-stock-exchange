@@ -1,7 +1,6 @@
 class Marquee {
   constructor(parentElement) {
-    this.parentElement = parentElement;
-    this.apiKey = config.SECRET_API_KEY;
+    this.parentElement = parentElement;    
   }
 
   async loadMarquee() {
