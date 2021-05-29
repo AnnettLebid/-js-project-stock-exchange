@@ -43,6 +43,7 @@ async function searchNasdaqWithProfile(searchTerm) {
 }
 
 async function getStockPriceData() { 
+  console.log('in stock price data')
   const response = await fetch(
     `https://financialmodelingprep.com/api/v3/quotes/nyse?apikey=${apiKey}`
   );
@@ -52,7 +53,8 @@ async function getStockPriceData() {
 
 app.get("/stock-price", (req, res) => {
   getStockPriceData().then((stockPriceData) => {    
-    const stockPrices = stockPriceData.slice(0, 200)   
+    const stockPrices = stockPriceData.slice(0, 200)  
+    res.send(stockPrices);
   });  
 });
 
