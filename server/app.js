@@ -42,6 +42,20 @@ async function searchNasdaqWithProfile(searchTerm) {
   return companiesWithProfiles;
 }
 
+async function getStockPriceData() { 
+  const response = await fetch(
+    `https://financialmodelingprep.com/api/v3/quotes/nyse?apikey=${apiKey}`
+  );
+  const data = await response.json();
+  return data;
+}
+
+app.get("/stock-price", (req, res) => {
+  getStockPriceData().then((stockPriceData) => {    
+    const stockPrices = stockPriceData.slice(0, 200)   
+  });  
+});
+
 app.get("/search", (req, res) => {
   const searchQuery = req.query.query;
   searchNasdaqWithProfile(searchQuery).then((companiesWithProfiles) => {

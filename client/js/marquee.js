@@ -5,20 +5,20 @@ class Marquee {
   }
 
   async loadMarquee() {
-    const pricesArray = await this.getStockPriceData();
+    const pricesArray = await this.fetchMarqueeToInternalServer();    
     await pricesArray.map((company) => {
       this.createMarquee(company);
-    });
+    }); 
   }
 
-  async getStockPriceData() {
-    let response = await fetch(
-      `https://financialmodelingprep.com/api/v3/quotes/nyse?apikey=${this.apiKey}`
+  async fetchMarqueeToInternalServer() {    
+    const response = await fetch(
+      `http://localhost:3000/stock-price`      
     );
-    let data = await response.json();
-    return data.slice(0, 200);
+    const data = await response.json(); 
+    return data;   
   }
-
+ 
   createMarquee(company) {
     if (company.price) {
       const marqueeContainer = document.createElement("div");
