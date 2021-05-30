@@ -74,7 +74,7 @@ class SearchForm {
     this.toggleSpinner();
     const response = await fetch(
       // `http://localhost:3000/search?query=${userSearch}`
-      `https://js-stock-exchange.herokuapp.com/search?query=${search}`
+      `https://js-stock-exchange.herokuapp.com/search?query=${userSearch}`
     );
     const data = await response.json();
     callback(data, userSearch);
