@@ -97,7 +97,8 @@ class CompanyInfo {
 
   async fetchCompProfileToServer() {     
     const response = await fetch(
-      `http://localhost:3000/company-profile/?query=${this.symbol}`          
+      `https://js-stock-exchange.herokuapp.com/company-profile/?query=${this.symbol}`
+      // `http://localhost:3000/company-profile/?query=${this.symbol}`          
     );
     const companyData = await response.json();
     return companyData;   
@@ -136,7 +137,8 @@ class CompanyInfo {
 
   async fetchPriceHistoryToServer() {     
     const response = await fetch(
-      `http://localhost:3000/historical-price-full/?query=${this.symbol}`          
+      `https://js-stock-exchange.herokuapp.com/historical-price-full/?query=${this.symbol}`
+      // `http://localhost:3000/historical-price-full/?query=${this.symbol}`          
     );
     const companyPriceHistory = await response.json();      
     return companyPriceHistory;   
