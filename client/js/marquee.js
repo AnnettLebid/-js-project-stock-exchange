@@ -12,8 +12,7 @@ class Marquee {
 
   async fetchMarqueeToInternalServer() {    
     const response = await fetch(
-      `https://js-stock-exchange.herokuapp.com/stock-price`
-      // `http://localhost:3000/stock-price`      
+      `https://js-stock-exchange.herokuapp.com/stock-price`           
     );
     const data = await response.json(); 
     return data;   
