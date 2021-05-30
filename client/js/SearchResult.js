@@ -103,8 +103,7 @@ class SearchResult {
         this.infoButton.innerHTML = "Information";
         this.infoButton.classList.add("float-right");
         this.infoButton.setAttribute("href", `./company.html?symbol=${compProfile.symbol}`);
-        li.appendChild(this.infoButton);
-        // this.onCompareButton(compProfile);
+        li.appendChild(this.infoButton);       
       } else {
         return
       }
