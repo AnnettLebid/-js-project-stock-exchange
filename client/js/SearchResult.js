@@ -29,8 +29,7 @@ class SearchResult {
     resultsContainer.appendChild(ul);
 
     let listOfCompanies = companies.forEach((compProfile) => {    
-      const {
-        image,
+      const {        
         companyName,
         changesPercentage,
         price,
@@ -58,6 +57,11 @@ class SearchResult {
 
         let companyImage = document.createElement("img");
         companyImage.classList.add("stock-image");
+        const image = compProfile.profile.image;
+        const noImagePic = "img/no-image-icon.png"
+        companyImage.onerror = function(e) {
+          companyImage.src = noImagePic;
+        };       
         companyImage.src = image;
         a.appendChild(companyImage);
 
