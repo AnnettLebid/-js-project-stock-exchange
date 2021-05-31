@@ -34,6 +34,7 @@ class SearchForm {
       "m-1",
       "d-inline",
       "p-2",
+      "px-3",
       "rounded-pill"
     );
     this.inputElement.type = "text";
